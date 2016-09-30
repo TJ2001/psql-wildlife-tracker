@@ -11,17 +11,18 @@ public class Animal implements Getter {
   public int sightingId;
   public int id;
   public int checkupCounter;
-  public int trackerAdded;
+  public int trackerCount;
 
-  public static final int MAX_CHECKUPS_ANNUAL = 2;
+  public static final int MAX_CHECKUPS_PER_YEAR = 2;
   public static final int MAX_TRACKERADDED = 1;
+  public static final int MIN_ALL = 0;
 
   public Animal(String name, String type, int sightingId) {
     this.name = name;
     this.type = type;
-    this.sighting-id = sighting-id;
-    this.checkupCounter = 0;
-    this.trackerAdded = 0;
+    this.sightingId = sightingId;
+    this.checkupCounter = MIN_ALL;
+    this.trackerCount = MIN_ALL;
   }
 
   public String getName() {
@@ -33,11 +34,19 @@ public class Animal implements Getter {
   }
 
   public int getSightingId() {
-    return sighting_id;
+    return sightingId;
   }
 
   public int getId() {
     return id;
+  }
+
+  public int getCheckupCounter(){
+    return checkupCounter;
+  }
+
+  public int getTrackerCount() {
+    return trackerCount;
   }
 
   @Override
@@ -102,28 +111,30 @@ public class Animal implements Getter {
     }
   }
 
+
   public void checkup() {
-    if (checkupCounter == MAX_CHECKUPS_ANNUAL) {
+    if (checkupCounter == MAX_CHECKUPS_PER_YEAR) {
       System.out.println("You cannot do more than two checkups annually");
-      throw new UnsupportedOperationException("You cannot do more than one like");
+      throw new UnsupportedOperationException("You cannot do more than two checkups annually");
     } else {
       checkupCounter++;
     }
   }
 
   public void putTracker() {
-    if (trackerAdded == MAX_TRACKERADDED) {
+    if (trackerCount == MAX_TRACKERADDED) {
       throw new UnsupportedOperationException("This animal already has a tracker!");
     } else {
-      trackerAdded++;
-    }
-
-    public List<Sighting> getSightingss() {
-      try(Connection con = DB.sql2o.open()) {
-        String sql = "SELECT * FROM sightings where animalId=:id";
-        return con.createQuery(sql)
-        .addParameter("id", this.id)
-        .executeAndFetch(Sighting.class);
-      }
+      trackerCount++;
     }
   }
+
+  public List<Sighting> getSightings() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM sightings where animalId=:id";
+      return con.createQuery(sql)
+      .addParameter("id", this.id)
+      .executeAndFetch(Sighting.class);
+    }
+  }
+}

@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class AnimalTest {
   private Animal testAnimal;
+  private Animal anotherAnimal;
 
   @Before
   public void initialize() {
@@ -79,56 +80,59 @@ public class AnimalTest {
   }
 
   @Test
-  public void likes_ownException() {
-    testAnimal.save();
-    try {
+  public void checkup_increasesAnimalCheckupCounter() {
+    testAnimal.checkup();
+    assertTrue(testAnimal.getCheckupCounter() > (Animal.MAX_CHECKUPS_PER_YEAR / 2));
+  }
+
+  @Test
+  public void checkup_increasesAnimalTrackerCount() {
+    testAnimal.putTracker();
+    assertTrue(testAnimal.getTrackerCount() > (Animal.MAX_TRACKERADDED));
+  }
+
+  @Test
+  public void animal_cannotRecieveMoreThanMaxChekupsPerYear() {
+    for(int i = Animal.MIN_ALL; i <= (Animal.MAX_CHECKUPS_PER_YEAR + 2); i++) {
+      try {
         testAnimal.checkup();
-      } catch (UnsupportedOperationException exception){ }
-    assertTrue(0 == testSighting.getLikes());
+      } catch (UnsupportedOperationException exception) { }
+    }
+    assertTrue(testAnimal.getCheckupCounter() <= Animal.MAX_CHECKUPS_PER_YEAR);
+  }
+
+  @Test(expected = UnsupportedOperationException.class)
+  public void checkup_throwsExceptionsIfCheckupCounterIsAtMaxValue() {
+    for(int i = Animal.MIN_ALL; i <= (Animal.MAX_CHECKUPS_PER_YEAR); i++) {
+      testAnimal.checkup();
+    }
   }
 
   @Test
-  public void likes_gainLikes() {
-    Sighting testSighting = new Sighting("This topic sucks", 1);
-    testSighting.save();
-    try {
-        testSighting.likes(2);
-      } catch (UnsupportedOperationException exception){ }
-    assertTrue(1 == testSighting.getLikes());
+  public void animal_cannotHaveMoreThanMaxTrackerAdded() {
+    for(int i = Animal.MIN_ALL; i <= (Animal.MAX_TRACKERADDED + 1); i++) {
+      try {
+        testAnimal.putTracker();
+      } catch (UnsupportedOperationException exception) { }
+    }
+    assertTrue(testAnimal.getTrackerCount() <= Animal.MAX_TRACKERADDED);
+  }
+
+  @Test(expected = UnsupportedOperationException.class)
+  public void trackerCount_throwsExceptionsIfTrackerCountIsAtMaxValue() {
+    for(int i = Animal.MIN_ALL; i <= (Animal.MAX_TRACKERADDED); i++) {
+      testAnimal.putTracker();
+    }
   }
 
   @Test
-  public void likes_OnlyOneLikesperUser() {
-    Sighting testSighting = new Sighting("This topic sucks", 1);
-    testSighting.save();
-    try {
-        testSighting.likes(2);
-        testSighting.likes(2);
-      } catch (UnsupportedOperationException exception){ }
-    assertTrue(1 == testSighting.getLikes());
+  public void getSighting_retrievesAllMonstersFromDatabase_monstersList() {
+    testAnimal.save();
+    Sighting firstSighting = new Sighting(1, "Sector 1", "Tom Sawyer");
+    firstSighting.save();
+    Sighting secondSighting = new Sighting(1, "Sector 2", "Jane Goodall");
+    secondSighting.save();
+    Sighting[] sightings = new Sighting[] { firstSighting, secondSighting };
+    assertTrue(testAnimal.getSightings().containsAll(Arrays.asList(sightings)));
   }
-
-
-
-  // @Test
-  // public void getMessage_manyToMany () {
-  //   testAnimal.save();
-  //   Message myMessage = new Message("This animal is okay.", 1);
-  //   myMessage.save();
-  //   testAnimal.add(myMessage);
-  //   assertTrue(myMessage.equals(testAnimal.getMessage().get(0)));
-  // }
-
-  // @Test
-  // public void getMonsters_retrievesAllMonstersFromDatabase_monstersList() {
-  //   Animal testAnimal = new Animal("Henry", "henry@henry.com");
-  //   testAnimal.save();
-  //   Monster firstMonster = new Monster("Squirtle", "Water", testAnimal.getId());
-  //   firstMonster.save();
-  //   Monster secondMonster = new Monster("Pikachu", "Elecric", testAnimal.getId());
-  //   secondMonster.save();
-  //   Monster[] monsters = new Monster[] { firstMonster, secondMonster };
-  //   assertTrue(testAnimal.getMonsters().containsAll(Arrays.asList(monsters)));
-  // }
-
 }

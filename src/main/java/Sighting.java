@@ -14,7 +14,7 @@ public class Sighting {
 
   public Sighting(int animalId, String location, String ranger) {
     this.animalId = animalId;
-    this.title = title;
+    this.location = location;
     this.ranger = ranger;
   }
 

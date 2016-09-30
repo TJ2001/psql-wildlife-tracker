@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class SightingTest {
   private Sighting testSighting;
+  private Sighting anotherSighting;
 
   @Before
   public void initialize() {
