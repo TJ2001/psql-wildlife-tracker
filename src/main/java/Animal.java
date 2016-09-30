@@ -137,4 +137,5 @@ public class Animal implements Getter {
       .executeAndFetch(Sighting.class);
     }
   }
+
 }

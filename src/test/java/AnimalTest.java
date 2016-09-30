@@ -53,10 +53,10 @@ public class AnimalTest {
   }
 
   @Test
-  public void find_returnsAnimalWithSameId_secondAnimal() {
+  public void find_returnsAnimalWithSameId_anotherAnimal() {
     testAnimal.save();
     anotherAnimal.save();
-    assertEquals(Animal.find(anotherAnimal.getId()), testAnimal);
+    assertEquals(Animal.find(anotherAnimal.getId()), anotherAnimal);
   }
 
   @Test
@@ -82,13 +82,13 @@ public class AnimalTest {
   @Test
   public void checkup_increasesAnimalCheckupCounter() {
     testAnimal.checkup();
-    assertTrue(testAnimal.getCheckupCounter() > (Animal.MAX_CHECKUPS_PER_YEAR / 2));
+    assertTrue(testAnimal.getCheckupCounter() > (Animal.MIN_ALL));
   }
 
   @Test
   public void checkup_increasesAnimalTrackerCount() {
     testAnimal.putTracker();
-    assertTrue(testAnimal.getTrackerCount() > (Animal.MAX_TRACKERADDED));
+    assertTrue(testAnimal.getTrackerCount() > (Animal.MIN_ALL));
   }
 
   @Test
@@ -126,11 +126,11 @@ public class AnimalTest {
   }
 
   @Test
-  public void getSighting_retrievesAllMonstersFromDatabase_monstersList() {
+  public void getSightings_retrievesAllSightingsFromDatabase_sightingsList() {
     testAnimal.save();
-    Sighting firstSighting = new Sighting(1, "Sector 1", "Tom Sawyer");
+    Sighting firstSighting = new Sighting(testAnimal.getId(), "Sector 1", "Tom Sawyer");
     firstSighting.save();
-    Sighting secondSighting = new Sighting(1, "Sector 2", "Jane Goodall");
+    Sighting secondSighting = new Sighting(testAnimal.getId(), "Sector 2", "Jane Goodall");
     secondSighting.save();
     Sighting[] sightings = new Sighting[] { firstSighting, secondSighting };
     assertTrue(testAnimal.getSightings().containsAll(Arrays.asList(sightings)));
