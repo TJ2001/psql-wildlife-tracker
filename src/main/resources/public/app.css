@@ -1,0 +1,28 @@
+body{
+  background-image: url(bg.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-position: center;
+}
+/*.well{
+  color: gray;
+}*/
+
+.underline {
+  text-decoration: underline;
+}
+
+a{
+  color: red;
+}
+
+a:hover{
+  color: pink;
+  text-decoration: none;
+}
+
+.image-resize {
+  width: 100%;
+  height: auto;
+}

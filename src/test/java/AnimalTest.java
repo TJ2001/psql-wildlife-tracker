@@ -11,8 +11,8 @@ public class AnimalTest {
 
   @Before
   public void initialize() {
-    testAnimal = new Animal("Racoon", "Not-Endangered", 1);
-    anotherAnimal = new Animal("Spotted Owl", "Endangered", 1);
+    testAnimal = new Animal("Racoon", "Not-Endangered");
+    anotherAnimal = new Animal("Spotted Owl", "Endangered");
   }
 
   @Rule
@@ -31,11 +31,6 @@ public class AnimalTest {
   @Test
   public void getType_animalInstantiatesWithType() {
     assertEquals("Not-Endangered", testAnimal.getType());
-  }
-
-  @Test
-  public void getSightingId_animalInstantiatesWithSightingId() {
-    assertEquals(1, testAnimal.getSightingId());
   }
 
   @Test
@@ -61,15 +56,14 @@ public class AnimalTest {
 
   @Test
   public void equals_returnsTrueIfNamesAretheSame() {
-    Animal sameAnimal = new Animal("Racoon", "Not-Endangered", 1);
+    Animal sameAnimal = new Animal("Racoon", "Not-Endangered");
     assertTrue(testAnimal.equals(sameAnimal));
   }
 
   @Test
   public void save_savesIntoDatabase_true() {
-    Animal myAnimal = new Animal("Why is the sky blue?", "Been wondering about the sky and came up with a question", 1);
-    myAnimal.save();
-    assertTrue(Animal.all().get(0).equals(myAnimal));
+    testAnimal.save();
+    assertTrue(Animal.all().get(0).equals(testAnimal));
   }
 
   @Test

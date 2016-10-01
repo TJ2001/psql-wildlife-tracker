@@ -1,0 +1,6 @@
+<h1>$animal.getName()</h1>
+
+#foreach ($recipe in $animal.getSightings())
+    <a href="/sighting/$sighting.getId()">$sighting.getLocation() <br> $sighting.getTimeSighted()</a>
+    <h5>$sighting.getRanger()</h5>
+#end

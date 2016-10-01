@@ -1,0 +1,12 @@
+
+<h1>Add a new animal!</h1>
+
+<form action="/animal/new" method="post">
+  <input id="animalId" name="animalId" type="hidden" value="$animal.getId()">
+  <label for="term">Animal:</label>
+  <input id="name" name="name" type="text" class="form-control">
+  <label for="term">Type: (Endangered or Not Endangered)</label>
+  <input id="type" name="type" type="text" class="form-control">
+
+  <button type="submit" class="btn btn-danger">Add Animal</button>
+</form>

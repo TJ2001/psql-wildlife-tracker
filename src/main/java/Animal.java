@@ -8,7 +8,6 @@ public class Animal implements Getter {
 
   public String name;
   public String type;
-  public int sightingId;
   public int id;
   public int checkupCounter;
   public int trackerCount;
@@ -17,10 +16,9 @@ public class Animal implements Getter {
   public static final int MAX_TRACKERADDED = 1;
   public static final int MIN_ALL = 0;
 
-  public Animal(String name, String type, int sightingId) {
+  public Animal(String name, String type) {
     this.name = name;
     this.type = type;
-    this.sightingId = sightingId;
     this.checkupCounter = MIN_ALL;
     this.trackerCount = MIN_ALL;
   }
@@ -31,10 +29,6 @@ public class Animal implements Getter {
 
   public String getType() {
     return type;
-  }
-
-  public int getSightingId() {
-    return sightingId;
   }
 
   public int getId() {
@@ -56,18 +50,16 @@ public class Animal implements Getter {
     } else {
       Animal newAnimal = (Animal) otherAnimal;
       return this.getName().equals(newAnimal.getName()) &&
-      this.getType().equals(newAnimal.getType()) &&
-      this.getSightingId() == newAnimal.getSightingId();
+      this.getType().equals(newAnimal.getType());
     }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals(name, type, sightingId) VALUES (:name, :type, :sightingId)";
+      String sql = "INSERT INTO animals(name, type) VALUES (:name, :type)";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("name", this.name)
       .addParameter("type", this.type)
-      .addParameter("sightingId", this.sightingId)
       .executeUpdate()
       .getKey();
     }
@@ -82,13 +74,12 @@ public class Animal implements Getter {
     }
   }
 
-  public void update(String name, int sightingId, String instructions) {
+  public void update(String name, String type) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE animals SET name = :name, type=:type, sightingId =:sightingId WHERE id=:id";
+      String sql = "UPDATE animals SET name = :name, type=:type WHERE id=:id";
       con.createQuery(sql)
       .addParameter("name", name)
       .addParameter("type", type)
-      .addParameter("sightingId", sightingId)
       .addParameter("id", this.id)
       .executeUpdate();
     }

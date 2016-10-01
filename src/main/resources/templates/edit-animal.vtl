@@ -1,0 +1,21 @@
+
+<h1>Edit Animals</h1>
+
+#foreach ($animal in $animals)
+  <form action="/animal/$animal.getId()/edit" method="post">
+    <div class='form-group'>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-info">Edit</button>
+        </span>
+        <input id="name" name="name" type="text" class="form-control" value="$animal.getName()">
+        <input id="type" name="type" type="text" class="form-control" value="$animal.getType()">
+      </div>
+    </div>
+  </form>
+  <form action="/animal/$animal.getId()/remove" method="post">
+    <button type="submit" class="btn btn-danger">Remove</button>
+  </form>
+<br>
+<br>
+#end
