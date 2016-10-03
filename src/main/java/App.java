@@ -87,6 +87,13 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/sightings", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      // model.put("sightings", sightings.all());
+      model.put("template", "templates/sightings.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
 //so far done
 
