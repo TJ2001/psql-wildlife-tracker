@@ -67,6 +67,7 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+
     get("/sighting/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("animals", Animal.all());
@@ -87,10 +88,20 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/sightings", (request, response) -> {
+    post("/sighting/:id/delete", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      // model.put("sightings", sightings.all());
-      model.put("template", "templates/sightings.vtl");
+      Sighting sighting = Sighting.find(Integer.parseInt(request.params("id")));
+      sighting.delete();
+      Animal animal = Animal.find(Integer.parseInt(request.params(":id")));
+      model.put("animal", animal);
+      model.put("template", "templates/animal.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/sightings-list", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("sighting", Sighting.all());
+      model.put("template", "templates/list-sightings.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -101,12 +112,7 @@ public class App {
   //
 
   //
-  //   get("/recipe", (request, response) -> {
-  //     Map<String, Object> model = new HashMap<String, Object>();
-  //     model.put("recipes", Recipes.all());
-  //     model.put("template", "templates/list-recipes.vtl");
-  //     return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
+
   //
   //   get("/recipe/:id/edit", (request, response) -> {
   //     Map<String, Object> model = new HashMap<String, Object>();
@@ -129,15 +135,6 @@ public class App {
   //   }, new VelocityTemplateEngine());
   //
 
-  //
-  //
-  //   post("/recipe/:id/remove", (request, response) -> {
-  //     Map<String, Object> model = new HashMap<String, Object>();
-  //     Recipes recipe = Recipes.find(Integer.parseInt(request.params(":id")));
-  //     recipe.delete();
-  //     response.redirect("/recipe");
-  //     return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
   //
   //   post("/recipe/:id/edit", (request, response) -> {
   //     Map<String, Object> model = new HashMap<String, Object>();

@@ -100,4 +100,13 @@ public class Sighting {
       return sighting;
     }
   }
+
+  // public static Animal getAnimal(int animalId) {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "SELECT * FROM animals where id=:id";
+  //     return con.createQuery(sql)
+  //     .addParameter("id", animalId)
+  //     .executeAndFetchFirst(Animal.class);
+  //   }
+  // }
 }

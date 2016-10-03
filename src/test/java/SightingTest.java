@@ -86,5 +86,13 @@ public class SightingTest {
       assertEquals(rightNow.getDay(), savedTestSighting.getDay());
   }
 
-
+  // @Test
+  // public void getAnimalbyAnimalId_retrievesAnimalNamebyId() {
+  //   testSighting.save();
+  //   Animal firstAnimal = new Animal("Racoon", "Not-Endangered");
+  //   firstAnimal.save();
+  //   Animal secondAnimal = new Animal("Spotted Owl", "Endangered");
+  //   secondAnimal.save();
+  //   assertEquals(testSihgihting.getAnimal(testSighting.getAnimalId()).getName(), firstAnimal.getName());
+  // }
 }

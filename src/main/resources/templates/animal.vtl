@@ -1,7 +1,17 @@
-<h1>$animal.getName()</h1>
+<h1 class="title">$animal.getName()</h1>
 <h4>$animal.getType()</h4>
 
+
+<h2 class="underline">Sightings</h2>
 #foreach ($sighting in $animal.getSightings())
-    <a href="/sighting/$sighting.getId()">$sighting.getLocation() <br> $sighting.getTimeSighted()</a>
-    <h5>$sighting.getRanger()</h5>
+<div class="sighting-list">
+  <h4>Location: $sighting.getLocation()</h4>
+  <h4>Time: $sighting.getTimeSighted()</h4>
+  <h4>Ranger: $sighting.getRanger()</h4>
+  <form action="/sighting/$sighting.getId()/delete" method="post">
+    <button type="submit" class="btn btn-danger" id="delete-sighting">Delete Sighting</button>
+  </form>
+    <a href="/sightings/$sighting.getId()/edit" class="btn btn-success">Edit Sighting</a>
+  <hr>
+</div>
 #end

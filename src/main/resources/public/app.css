@@ -39,6 +39,19 @@ a:hover{
 
 .title {
   text-align:center;
+  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.pt {
+  font-family: 'PT Sans Caption', sans-serif;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .btn-purple {

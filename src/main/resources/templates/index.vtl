@@ -1,14 +1,16 @@
-<h1 class="title">Wildlife Tracker -=Alpha=</h1>
+<h1 class="title">Wildlife Tracker -=Alpha=-</h1>
 <br>
 
-<h2 class="underline">Animals</h2>
+<h2 class="underline pt">Animals</h2>
 #foreach ($animal in $animals)
-  <a href="/animals/$animal.getId()"><h2>$animal.getName()</h2></a>
+  <a href="/animals/$animal.getId()"><h2 class="pt">$animal.getName()</h2></a>
 #end
 <a href="animals/edit">Edit the Animals</a>
 <br>
 <br>
-<a href="animal/new">Add Animals</a>
+<a class="btn btn-lg btn-purple" href="animal/new">Add New Animal</a>
+<a class="btn btn-primary btn-lg" href="/sighting/new">Add New Sighting</a>
+<a class="btn btn-info btn-lg" href="/sightings-list">All Sightings</a>
 <br>
 <br>
 <img class="image-resize" src="images/tiger-cub.jpg" alt="image of animal" />
