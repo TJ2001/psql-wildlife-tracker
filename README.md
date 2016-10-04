@@ -1,4 +1,4 @@
-# Wildlife_Tracker_
+# Wildlife Tracker
 
 #### _It will list animals and their sightings, {September 30, 2016}_
 
@@ -16,7 +16,7 @@ _The purpose of this application is to create database with a table for sighting
 * _Open a terminal and run command "postgres"._
 * _Open another terminal or another tab in the terminal run command "psql"._
 * In PSQL: Use the following commands (1) "CREATE DATABASE wildLife_tracker;"
-  (2) "CREATE TABLE animals(id serial PRIMARY KEY, name varchar, type varchar, sightingid int);" 3. "CREATE TABLE sightings(id serial PRIMARY KEY, animalid int, location varchar, ranger varchar, timesighted timestamp);"
+  (2) "\c wildlife_tracker;" (3)"CREATE TABLE animals(id serial PRIMARY KEY, name varchar, type varchar);" (4) "CREATE TABLE sightings(id serial PRIMARY KEY, animalid int, location varchar, ranger varchar, timesighted timestamp);"
 * _If you want to run the tests as well. In PSQL: "CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;"
 * _Open console to the project package folder and run "gradle run" ._
 * _Go to http://localhost:4567/ in a browser preferably Chrome._

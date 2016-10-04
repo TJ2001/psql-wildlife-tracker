@@ -1,15 +1,8 @@
-<!-- /*#foreach ($sighting in $sightings)
-<div class="sighting-list">
-  <h4>$Animal.find(sighting.getAnimalId)</h4>
-  <h4>$sighting.getLocation()</h4>
-  <h4>$sighting.getTimeSighted()</h4>
-  <h4>$sighting.getRanger()</h4>
-  <form action="/sightings/$sighting.getId()/delete" method="post">
-    <button type="submit" class="btn btn-danger" id="delete-sighting">Delete Client Entry</button>
-  </form>
-    <a href="/sightings/$sighting.getId()/edit" class="btn btn-success">Edit Entry</a>
-  <hr>
-</div>*/ -->
-
-
-<h2>oadfijoiafjdoiafo</h2>
+#foreach ($sighting in $sightings)
+<h3>Location: $sighting.getLocation()</h3>
+<h3>Time: $sighting.getTimeSighted()</h3>
+<h3>Ranger: $sighting.getRanger()</h3>
+<h3>Animal: $animal.getName() </h3>
+<br>
+<br>
+#end

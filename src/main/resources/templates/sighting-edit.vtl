@@ -1,0 +1,19 @@
+
+<h2>Edit Sighting</h2>
+<form action="/sighting/$sighting.getId()/edit" method="post">
+  <div class ="form-group">
+    <label for="location">Locations</label>
+    <input id="location" placeholder=" $sighting.getLocation()" class="form-control" name="location" type="text">
+    <label for="ranger">Ranger: </label>
+    <input id="ranger" placeholder="$sighting.getRanger()" class="form-control" name="ranger" type="text">
+    <div class='form-group'>
+      <label for="animalId">Select a Listed Animal</label>
+      <select id='animalId' name='animalId' type='text' class="drop-down">
+        #foreach($animal in $animals)
+          <option required value="$animal.getId()">$animal.getName()</option>
+        #end
+      </select>
+    </div>
+  </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.sql.SQLException;
 
-public class Sighting {
+public class Sighting implements Getter {
   private int animalId;
   private String location;
   private String ranger;
@@ -72,13 +72,13 @@ public class Sighting {
     }
   }
 
-  public void update(String content, String animalId) {
+  public void update(int animalId, String location, String ranger) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "UPDATE sightings SET animalId = :animalId, ranger = :ranger, location = :location WHERE id = :id";
       con.createQuery(sql)
       .addParameter("animalId", animalId)
-      .addParameter("ranger", ranger)
       .addParameter("location", location)
+      .addParameter("ranger", ranger)
       .addParameter("id", this.id)
       .executeUpdate();
     }

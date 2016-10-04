@@ -100,11 +100,32 @@ public class App {
 
     get("/sightings-list", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("sighting", Sighting.all());
+      model.put("animal", Animal.find(Sigthing.getAnimalId));
+      model.put("sightings", Sighting.all());
       model.put("template", "templates/list-sightings.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/sighting/:id/edit", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Sighting sighting = Sighting.find(Integer.parseInt(request.params(":id")));
+      model.put("sighting", sighting);
+      model.put("animal", Animal.all());
+      model.put("template", "templates/sighting-edit.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/sighting/:id/edit", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Sighting sighting = Sighting.find(Integer.parseInt(request.params(":id")));
+      Animal animal = Animal.find(Integer.parseInt(request.queryParams("animalId")));
+      int animalId = animal.getId();
+      String location = request.queryParams("location");
+      String ranger = request.queryParams("ranger");
+      sighting.update(animalId, location, ranger);
+      model.put("template", "templates/success-edit.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 //so far done
 
@@ -114,14 +135,7 @@ public class App {
   //
 
   //
-  //   get("/recipe/:id/edit", (request, response) -> {
-  //     Map<String, Object> model = new HashMap<String, Object>();
-  //     Recipes repcipes = Recipes.find(Integer.parseInt(request.params(":id")));
-  //     model.put("recipes", repcipes);
-  //     model.put("categories", Category.all());
-  //     model.put("template", "templates/recipe-edit.vtl");
-  //     return new ModelAndView(model, layout);
-  //   }, new VelocityTemplateEngine());
+
   //
 
   //
